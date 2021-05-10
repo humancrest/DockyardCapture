@@ -1,0 +1,47 @@
+plugins {
+    id 'java'
+}
+
+group 'jp.co.humancrest'
+jar.baseName 'DockyardCapture'
+version '1.0'
+apply plugin: 'java'
+apply plugin: 'application'
+mainClassName = 'jp.co.humancrest.Dockyard'
+
+[compileJava, compileTestJava]*.options*.encoding = "UTF-8"
+
+
+repositories {
+    mavenCentral()
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'jp.co.humancrest.Dockyard'
+    }
+    doFirst {
+        from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    }
+    exclude 'META-INF/*.RSA', 'META-INF/*.SF', 'META-INF/*.DSA'
+}
+
+dependencies {
+    compile group: 'com.beust', name: 'jcommander', version: '1.78'
+    // TODO: Setup lombok https://projectlombok.org/setup/gradle
+    implementation group: 'org.projectlombok', name: 'lombok', version: '1.18.10'
+    annotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.18.10'
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.0.0-beta-2'
+    compile group: 'io.github.bonigarcia', name: 'webdrivermanager', version: '4.3.1'
+    testImplementation "org.junit.jupiter:junit-jupiter:5.7.0"
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testImplementation group: 'org.mockito', name: 'mockito-core', version: '3.8.0'
+    testImplementation group: 'org.hamcrest', name: 'hamcrest-junit', version: '2.0.0.0'
+    testCompile("org.junit.jupiter:junit-jupiter-params:5.7.0")
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+
+}
+
+test {
+    useJUnitPlatform()
+}
