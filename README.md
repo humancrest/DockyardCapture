@@ -36,4 +36,4 @@ The latest version of the [Java 11 OpenJDK](https://openjdk.java.net/)
 
 ## License
 
-umbt's source code is made available under the [Apache 2.0 license](https://github.com/humancrest/DockyardCapture/blob/main/LICENSE).
+DockyardCapture's source code is made available under the [Apache 2.0 license](https://github.com/humancrest/DockyardCapture/blob/main/LICENSE).
